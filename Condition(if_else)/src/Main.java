@@ -6,7 +6,6 @@ public class Main {
 		int i, j;
 		Scanner scanner = new Scanner(System.in);
 		int n = scanner.nextInt();
-
 		if (n == 1) {
 			System.out.println("One");
 		} else if (n == 2) {
