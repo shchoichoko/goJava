@@ -14,8 +14,8 @@ public class Main {
 			int n = sc.nextInt();
 			int index2 = 1;
 
-			for (int index = 1; index < n; index++) {
-				for (index2 = 0; index2 < index; index2++) {
+			for (int index = 0; index < n; index++) {
+				for (index2 = 0; index2 < index+1; index2++) {
 					System.out.print("*");
 				}
 				System.out.println(" ");
@@ -54,7 +54,9 @@ public class Main {
 			}
 			break;
 		}
-
+		default : {
+			System.out.println("Error!");
+		}
 		}
 	}
 
