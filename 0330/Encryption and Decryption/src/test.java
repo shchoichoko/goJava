@@ -21,7 +21,7 @@ public class test {
 					}
 				} 
 			}
-			
+		
 			for (int z = 0; z < ja.length; z++) {
 				if (strArr[i].substring(0, 1).contains(ja[z])) {
 					if (strArr[i - 1].equals("an")) {
