@@ -12,7 +12,6 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		String stringSet = " ";
 		stringSet = sc.nextLine();
-		//stringSet = sc.nextLine();
 		
 		return stringSet;
 	}
