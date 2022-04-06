@@ -36,6 +36,7 @@ public class Main {
 		}
 		Set<String> strSet = new HashSet<String>(strArr);
 		Set<String> strSet2 = new HashSet<String>(strArr2);
+		
 		for (int i = 0; i < strSet.size(); i++) {
 			for (int j = 0; j < strSet2.size(); j++) {
 				if (strArr.get(i).equals(strArr2.get(j))) {
@@ -43,6 +44,7 @@ public class Main {
 				}
 			}
 		}
+		
 		System.out.println(strArr.size());
 		System.out.println(strArr2.size());
 		System.out.println(count);
