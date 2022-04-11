@@ -1,0 +1,8 @@
+Useful Algorithm!
+
+1. For Compare two values (삼항 연산자를 이용하여 두 수의 크기 비교!)
+
+  public int CompareValues(int a, int b){
+    int result = 0;
+    result = ( a < b ? -1 : ( a == b ? 0 : 1));
+  }   
