@@ -2,7 +2,7 @@
 public class FloatingPoint {
 
 	public static void main(String[] args) {
-		// #5 Operate floating point. 22.04.14 . csh
+		// #5 소수점 자리의 반올림 버림 처리 22.04.14 . csh
 		int k41_MyVal = 14 / 5;		//정수형 나누기
 		System.out.printf("#5-1 : %d\n", k41_MyVal);
 		

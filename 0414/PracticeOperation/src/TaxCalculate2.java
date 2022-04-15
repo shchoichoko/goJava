@@ -1,6 +1,6 @@
 
 public class TaxCalculate2 {
-	// #7 Calculate Tax. 22.04.14 . csh
+	// #7 세금 계산. 22.04.14 . csh
 	public static int netprice(int k41_price, double k41_taxRate ) {
 		return (int)(k41_price / (1+k41_taxRate));	//세전 가격 구하기. 세전 가격 = 소비자 가격 / (1+세율)
 	}

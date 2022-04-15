@@ -1,8 +1,8 @@
 
 public class TaxCalculate3 {
-	// #8 Calculate Tax and Get receipt. 22.04.14 . csh
+	// #8 세금 계산 및 영수증 출력. 22.04.14 . csh
 	public static int getNetprice(int k41_price, double k41_taxRate) {
-		return (int)(k41_price/(1+k41_taxRate));
+		return (int)(k41_price/(1+k41_taxRate));	//세전 가격 구하기. 세전 가격 = 소비자 가격 / (1+세율)
 	}
 	
 	public static void main(String[] args) {
@@ -20,10 +20,11 @@ public class TaxCalculate3 {
 			System.out.printf("%.5s %7d \t%2d \t%9d\n", k41_item[i], k41_price[i], k41_amount[i], k41_sum);// 배열 순서가 일치하기 때문에 이렇게 활용 가능
 		}		
 		System.out.printf("\n******************************************\n");
-		System.out.printf("지불 금액 :		%17d\n\n", k41_totalSum);
+		System.out.printf("지불 금액 :		%17d\n", k41_totalSum);
 		int k41_netPrice = getNetprice(k41_totalSum, k41_taxRate);	// 위에 함수를 getNetprice 함수를 이용해, 세전 금액 계산
+		System.out.printf("과세금액 :       %24d\n", k41_netPrice); 
 		int k41_tax = k41_totalSum - k41_netPrice;	// 세금 = 세후 금액 - 세전 금액
-		System.out.printf(" 세  금  :	\t%17d\n", k41_tax);
+		System.out.printf("세  금  :	\t%17d\n", k41_tax);
 		
 	}
 

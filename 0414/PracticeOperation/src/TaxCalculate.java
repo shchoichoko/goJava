@@ -1,6 +1,6 @@
 
 public class TaxCalculate {
-	// #6 Calculate Tax. 22.04.14 . csh
+	// #6 세금 계산 22.04.14 . csh
 	//세금 구하는 메소드
 	public static int taxcal(int k41_val, int k41_rate) {
 		int k41_ret;		// 더블 형식의 계산 값과 정수형의 계산값이 같다면 그대로 계산하고, 
