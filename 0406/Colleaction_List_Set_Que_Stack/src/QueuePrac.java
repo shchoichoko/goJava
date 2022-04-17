@@ -12,7 +12,6 @@ public class QueuePrac {
 	public static Queue<Integer> numToQueue() {
 		Queue<Integer> num = new LinkedList<Integer>();
 		int input = 0;
-
 		for (int i = 0; i < 100; i++) {
 			if ((input = (int) (Math.random() * 30)) % 2 != 0) {
 				num.offer(input);
