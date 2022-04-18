@@ -1,5 +1,5 @@
 
-public class KoreaNumberAdvanced {
+public class KoreanNumberAdvanced {
 	// #13 숫자읽기(고급) 22.04.15 csh
 	public static void main(String[] args) {
 		
