@@ -2,7 +2,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Receipt3 {
+public class Test {
 
 	public static void main(String[] args) {
 		// 품명
@@ -17,81 +17,85 @@ public class Receipt3 {
 		// 수량
 		int[] k41_num = { 1, 4, 1, 1, 10, 5, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2 };
 		// true면 과세, false면 면세
-		boolean[] k41_TaxItems = { true, true, false, true, true, true, false, false, true, true, true, false, true,
+		boolean[] k41_NoTaxfree = { true, true, false, true, true, true, false, false, true, true, true, false, true,
 				false, false, true, false, false, true, true, false, true, true, true, true, true, false, true, true,
 				false };
 		int k41_taxExemption = 0;	//면세 합을 저장해줄 변수.
-		int k41_priceTotal = 0;	//전체의 합계를 저장해줄 변수.
-		int k41_supPrice = 0;	//과세 물품의 합을 저장해줄 변수.
+		int k41_priceTotal = 0;	//단가의 합계를 저장해줄 변수.
+		int k41_supPriceTotal = 0;	//과세 물품의 합을 저장해줄 변수.
 		int k41_points = 5473;	// 원래 보유하고있던 적립포인트
-		
+		int k41_tax = 0;
 		// 콤마찍기
 		DecimalFormat k41_df = new DecimalFormat("###,###,###,###,###");
 		// 출력부분
-		System.out.printf("%36s\n","이마트 죽전점(031)888-1234");
-		System.out.printf("%32s\n","206-86-50913 강희석");
-		System.out.printf("%31s\n","용인 수지구 포은대로 552");
+		System.out.printf("%33s\n","이마트 죽전점(031)888-1234");
+		System.out.printf("%29s\n","206-86-50913 강희석");
+		System.out.printf("%28s\n","용인 수지구 포은대로 552");
 		System.out.println("영수증 미지참시 교환/환불 불가");
 		System.out.println("정상상품에 한함, 30일 이내(신선 7일)");
 		System.out.println("*일부 브랜드매장 제외(매장 고지물참조)");
 		System.out.println("교환/환불 구매점에서 가능(결제카드 지참)");
-		System.out.println("");
-		System.out.printf("[구매]%s %23s\n", getPresentTime(1), "POS:0011-9861");
-		System.out.println("----------------------------------------------");
-		System.out.printf("   상 품 명            단 가   수량    금  액\n");
-		System.out.println("----------------------------------------------");
+		System.out.printf("[구매]%s %18s\n", getPresentTime(1), "POS:0011-9861");
+		System.out.println("-----------------------------------------");
+		System.out.printf("   상 품 명        단 가   수량    금  액\n");
+		System.out.println("-----------------------------------------");
 		
 		for (int k41_i = 0; k41_i < k41_itemName.length; k41_i++) {	// 품목 수만큼 반복하기.
-			if (k41_TaxItems[k41_i] == false) { // 면세유무 false면 앞에 *넣고 true라면 빈칸을 넣기.
+			if (k41_NoTaxfree[k41_i] == false) { // 면세유무 false면 앞에 *넣고 true라면 빈칸을 넣기.
 				System.out.printf(" * ");
-				k41_taxExemption += k41_price[k41_i]*k41_num[k41_i];
 			} else {
 				System.out.printf("   ");
-			}	
-			// 출력되는 문자열 길이를 고정시켜놓고, 순번대로 출력하기. DefimalFormat을 이용해 단가와 금액에 콤마를 적용한다. 
-			//중간에 수량도 출력. 
-			System.out.printf("%s%10s% 3d %10s\n", subStrByte(k41_itemName[k41_i], 19), k41_df.format(k41_price[k41_i]),
+			}	// 출력되는 문자열 길이를 13로 고정시켜놓고, 순번대로 출력하기. DefimalFormat을 이용해 단가와 금액에 콤마를 적용한다. 중간에 수량도 출력. 
+			System.out.printf("%s %10s%3d %10s\n", subStrByte(k41_itemName[k41_i], 13), k41_df.format(k41_price[k41_i]),
 					k41_num[k41_i], k41_df.format(k41_price[k41_i] * k41_num[k41_i]));
 			if ((k41_i + 1) % 5 == 0) {	// 품목이 많아서 5개씩 출력할 때마다 한줄씩 띄워준다.
-				System.out.println("----------------------------------------------");
+				System.out.println("-----------------------------------------");
 			}
-			k41_priceTotal += k41_price[k41_i]*k41_num[k41_i];
+			if (k41_NoTaxfree[k41_i] == false) {	// 면세 금액만 따로 더해주는 식.
+				k41_taxExemption += k41_price[k41_i]*k41_num[k41_i];
+			} else {	// 면세품목을 제외한 품목들의 부가세와 금액을 더해주는 식.
+				k41_priceTotal += k41_price[k41_i]*k41_num[k41_i];	//과세물품의 금액을 모두 k41_priceTotal에 더해준다.
+				k41_tax = k41_price[k41_i]/11;
+				double k41_tax_check = k41_price[k41_i]/ 11.0;
+				if (k41_tax != k41_tax_check) {
+					k41_tax++;
+				} else {}
+				k41_supPriceTotal += k41_price[k41_i] - k41_tax;
+			}	
 
 		}
-		int k41_tax = (k41_priceTotal - k41_taxExemption)/ 11;
-		double k41_tax_check = (k41_priceTotal - k41_taxExemption) / 11.0;
+		k41_tax = k41_priceTotal/ 11;
+		double k41_tax_check = k41_priceTotal / 11.0;
 		if (k41_tax == k41_tax_check) {
 		} else {
 			k41_tax = k41_tax + 1;
 		}
-		k41_supPrice = k41_priceTotal - k41_tax - k41_taxExemption;
-		System.out.println("");
-		System.out.printf("%22s %18d\n", "총 품목 수량", k41_itemName.length);
-		System.out.printf("%23s %18s\n", "(*)면 세  물 품", k41_df.format(k41_taxExemption));
-		System.out.printf("%23s %18s\n", "과 세  물 품", k41_df.format(k41_supPrice));
-		System.out.printf("%24s %18s\n", "부   가   세", k41_df.format(k41_tax));
-		System.out.printf("%25s %18s\n", "합        계",
-				k41_df.format(k41_priceTotal));
-		System.out.printf("%11s %28s\n", "결 제 대 상 금 액",
-				k41_df.format(k41_priceTotal));
-		System.out.println("----------------------------------------------");
-		System.out.printf("%s %32s\n", "0012 KEB 하나", "541707**0484/35860658");
-		System.out.printf("%s %19s %10s\n", "카드결제(IC)", "일시불 /",
-				k41_df.format(k41_priceTotal));
-		System.out.println("----------------------------------------------");
-		System.out.printf("%24s\n", "[신세계포인트 적립]");
+		System.out.printf("%22s %13d\n", "총 품목 수량", k41_itemName.length);
+		System.out.printf("%23s %13s\n", "(*)면 세  물 품", k41_df.format(k41_taxExemption));
+		System.out.printf("%23s %13s\n", "과 세  물 품", k41_df.format(k41_supPriceTotal));
+		System.out.printf("%24s %13s\n", "부   가   세", k41_df.format(k41_tax));
+		System.out.printf("%25s %13s\n", "합        계",
+				k41_df.format(k41_priceTotal+k41_taxExemption));
+		System.out.printf("%11s %23s\n", "결 제 대 상 금 액",
+				k41_df.format(k41_priceTotal+k41_taxExemption));
+		System.out.println("-----------------------------------------");
+		System.out.printf("%s %27s\n", "0012 KEB 하나", "541707**0484/35860658");
+		System.out.printf("%s %14s %10s\n", "카드결제(IC)", "일시불 /",
+				k41_df.format(k41_priceTotal+k41_taxExemption));
+		System.out.println("-----------------------------------------");
+		System.out.printf("%21s\n", "[신세계포인트 적립]");
 		System.out.println("홍*두 고객님의 포인트 현황입니다.");
-		System.out.printf("%6s %17s %13s\n", "금회발생포인트", "9350**9995", k41_df.format((k41_priceTotal)/1000));
-		System.out.printf("%8s %15s(%12s)\n", "누계(가용)포인트", k41_df.format(5473+(k41_priceTotal)/1000), k41_df.format(k41_points));
+		System.out.printf("%6s %17s %8s\n", "금회발생포인트", "9350**9995", k41_df.format((k41_priceTotal+k41_taxExemption)/1000));
+		System.out.printf("%8s %14s(%8s)\n", "누계(가용)포인트", k41_df.format(5473+(k41_priceTotal)/1000), k41_df.format(k41_points));
 		System.out.printf("%19s\n", "*신세계포인트 유효기간은 2년입니다.");
-		System.out.println("----------------------------------------------");
-		System.out.printf("%22s\n", "구매금액기준 무료주차시간 자동부여");
-		System.out.printf("%s %34s\n", "차량번호 :", "34저****");
-		System.out.printf("%s %35s\n", "입차시간 :", getPresentTime(3));	// 현재시각에서 2시간 이전 시간을 출력.
-		System.out.println("----------------------------------------------");
-		System.out.printf("캐셔:084599 양00 %29s\n","1150");
-		System.out.printf("%29s\n","|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ");
-		System.out.printf("%17s/00119861/00164980/31",getPresentTime(4));
+		System.out.println("-----------------------------------------");
+		System.out.printf("%18s\n", "구매금액기준 무료주차시간 자동부여");
+		System.out.printf("%s %29s\n", "차량번호 :", "34저****");
+		System.out.printf("%s %30s\n", "입차시간 :", getPresentTime(3));	// 현재시각에서 2시간 이전 시간을 출력.
+		System.out.println("-----------------------------------------");
+		System.out.printf("캐셔:084599 양00 %24s\n","1150");
+		System.out.printf("%26s\n","|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ|ㅣ");
+		System.out.printf("%14s/00119861/00164980/31",getPresentTime(4));
 		
 	}
 
@@ -104,13 +108,14 @@ public class Receipt3 {
 			k41_getTime = k41_time.format(k41_cal.getTime());	
 		}
 		else if(order == 2) {	//매개 변수에 2를 넣었을때 출력하는 형식을 YYYY/MM/dd HH:mm:ss로 바꿈
-			SimpleDateFormat k41_time = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+			SimpleDateFormat k41_time = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
 			k41_getTime = k41_time.format(k41_cal.getTime());
-		} else if(order == 3) {//매개 변수에 3을 넣었을때 출력하는 형식에 2시간 이전 시간을 넣는다.(입차시간을 위한 식)
-			SimpleDateFormat k41_time = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+		} else if(order == 3) {//매개 변수에 3을 넣었을때 출력하는 형식을 YYYY/MM/dd HH:mm로 바꾸고, 2시간 이전 시간을 넣는다.(입차시간을 위한식)
+			SimpleDateFormat k41_time = new SimpleDateFormat("YYYY-MM-dd HH:mm");
 			k41_cal.add(Calendar.HOUR, -2);
 			k41_getTime = k41_time.format(k41_cal.getTime());	
 		}
+		
 		else {
 			SimpleDateFormat k41_time = new SimpleDateFormat("YYYYMMdd");
 			k41_getTime = k41_time.format(k41_cal.getTime());
