@@ -3,7 +3,12 @@ approved.defs.file.last.changed.time=1624986146000
 configurationInstallLocation=/C\:/Users/\uD3F4\uB9AC\uD14D/Downloads/eclipse-java-2022-03-R-win32-x86_64/eclipse/
 eclipse.preferences.version=1
 iconcolormode=primary
+<<<<<<< HEAD
 last.download.attempt.time=1650326591115
 lastConfiguration=1650326523901
+=======
+last.download.attempt.time=1650287441580
+lastConfiguration=1650287420737
+>>>>>>> d7e2acc6bcc3ae9c5d7ae21aa0803c6c75e3a13f
 newinstall=true
 workbench.theme=Dark Gray
