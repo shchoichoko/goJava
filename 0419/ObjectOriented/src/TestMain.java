@@ -1,6 +1,6 @@
 
 public class TestMain {
-	//#5 클래스 객체 인스턴스(2) 22.04.19 최수혁
+	//#5 클래스 객체 인스턴스(2) 22.04.20 최수혁
 	private static int k41_inVal;
 	
 	public static void up() {

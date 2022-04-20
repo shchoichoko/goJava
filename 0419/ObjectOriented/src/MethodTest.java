@@ -1,6 +1,6 @@
 
 public class MethodTest {
-	//#1 변수와 메서드 22.04.19 최수혁
+	//#1 변수와 메서드 22.04.20 최수혁
 	public static void iamMethod() {
 		System.out.printf("메소드라 불러줘요~~\n");
 	}

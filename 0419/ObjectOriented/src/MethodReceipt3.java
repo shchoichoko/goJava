@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MethodReceipt3 {
-	//#3 변수와 메서드3 22.04.19 최수혁
+	//#3 변수와 메서드3 22.04.20 최수혁
 	static int k41_taxExemption = 0;	//면세 합을 저장해줄 변수.
 	static int k41_priceTotal = 0;	//전체의 합계를 저장해줄 변수.
 	static int k41_supPrice = 0;	//과세 물품의 합을 저장해줄 변수.
