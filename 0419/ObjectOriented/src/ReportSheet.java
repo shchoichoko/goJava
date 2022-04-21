@@ -13,7 +13,7 @@ public class ReportSheet {
 	static int k41_engSumArr[] = new int[k41_totalPageNum]; // 페이지 수만큼 크기 지정.
 	static int k41_matSumArr[] = new int[k41_totalPageNum]; // 페이지 수만큼 크기 지정.
 	static int k41_lastKorSum = 0;static int k41_lastEngSum = 0;static int k41_lastMatSum = 0;static int k41_lastSum = 0;
-	static int k41_totalKorSum = 0; static int k41_totalEngSum = 0;static int k41_totalMatSum = 0;
+	static int k41_totalKorSum = 0; static int k41_totalEngSum = 0;static int k41_totalMatSum = 0; static int k41_accPeople = 0;
 	
 	public static void main(String[] args) {// 메인함수
 		inputData(); // 데이터 저장하는 함수.
@@ -44,6 +44,7 @@ public class ReportSheet {
 				k41_korSumArr[k41_p] +=k41_kor; 
 				k41_engSumArr[k41_p] +=k41_eng; 
 				k41_matSumArr[k41_p] +=k41_mat; 
+				
 			}
 			
 			//마지막 페이지 저장.
@@ -54,6 +55,7 @@ public class ReportSheet {
 					int k41_eng = (int) (Math.random() * 100); // 영어 점수를 랜덤으로 생성1~100점까지 생성.
 					int k41_mat = (int) (Math.random() * 100); 
 					k41_inData.SetData(k41_p, k41_l, k41_name, k41_kor, k41_eng, k41_mat);
+					
 				}
 			}
 		}
@@ -84,6 +86,7 @@ public class ReportSheet {
 						System.out.printf("%03d   %4s %5d %5d %5d %5d %6.0f\n", k41_inData.k41_num[k41_i] + 1,
 								k41_inData.k41_name[k41_i], k41_inData.k41_kor[k41_i], k41_inData.k41_eng[k41_i],
 								k41_inData.k41_mat[k41_i], k41_inData.k41_sum[k41_i], k41_inData.k41_avg[k41_i]);
+						
 				}
 				
 				System.out.println("==================================================");
@@ -101,12 +104,13 @@ public class ReportSheet {
 					k41_accEngSumVal += k41_engSumArr[k41_r]; 
 					k41_accMatSumVal +=k41_matSumArr[k41_r];
 					
+					
 				}
 				// 마지막 페이지와 이전까지 누적페이지 합과 평균 구하는 식
 				k41_accTotalSum = k41_accKorSumVal + k41_accEngSumVal + k41_accMatSumVal;
-				k41_accKorAvg = k41_accKorSumVal/(double)k41_printPerson;
-				k41_accEngAvg = k41_accEngSumVal/(double)k41_printPerson;
-				k41_accMatAvg = k41_accMatSumVal/(double)k41_printPerson;
+				k41_accKorAvg = k41_accKorSumVal/(double)k41_accPeople;
+				k41_accEngAvg = k41_accEngSumVal/(double)k41_accPeople;
+				k41_accMatAvg = k41_accMatSumVal/(double)k41_accPeople;
 				k41_accAvgTotal = k41_accKorAvg + k41_accEngAvg + k41_accMatAvg;
 				System.out.printf("누적페이지\n");
 				System.out.printf("합계        %6d %5d %5d %5d %6.0f\n", k41_accKorSumVal, 
