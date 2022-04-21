@@ -17,12 +17,18 @@ public class MaxMinValues {
 	public static void main(String[] args) throws IOException {
 		// #8 2015년 종가 기준 최대 최소값 구하기  22.04.21 
 		DecimalFormat k41_df = new DecimalFormat("###,###,###,###,###,###");
+		// 콤마찍기 
 		File k41_f = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\FileReadTest\\2015_SamSung.csv");
 		BufferedReader k41_br = new BufferedReader(new FileReader(k41_f));
 		// 파일을 읽어줄 버퍼리더 객체를 생성.
-		String k41_readtxt;String k41_startTime; String k41_endTime;
-		k41_startTime = getTime();
-		System.out.println("시작 시간 : "+k41_startTime);
+		SimpleDateFormat time = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+		//현재 시간 포맷 작성.
+		String k41_readtxt;String k41_startTimeStr;String k41_endTimeStr;
+		//한줄씩 읽기위한 문자열 생성. 시작 시 현재시각 저장을 위한 문자열. 종료 시 현재 시각 저장을 위한 문자열.
+		long k41_startTime; long k41_endTime;
+		//시작 시간, 끝 시간 저장을 위한 변수.
+
+		k41_startTime =System.currentTimeMillis();
 		if((k41_readtxt = k41_br.readLine())==null) {	//한줄씩 읽은 값이 null값이라면 빈파일이라고 출력함
 			System.out.println("빈 파일입니다.");
 			return;
@@ -46,25 +52,13 @@ public class MaxMinValues {
 		k41_br.close();
 		System.out.printf(" 최대값 : %s원\n", k41_df.format(k41_maxVal));
 		System.out.printf(" 최소값 : %s원\n", k41_df.format(k41_minVal));
-		k41_endTime=getTime();
-		System.out.println("끝날때 시간 : "+k41_endTime);
+		k41_endTime =System.currentTimeMillis();
+		k41_startTimeStr=time.format(new Date(k41_startTime));
+		k41_endTimeStr = time.format(new Date(k41_endTime));
+		System.out.println("시작시 시간은 " + k41_startTimeStr + "입니다.");
+		System.out.println("종료시 시간은 " + k41_endTimeStr + "입니다.");
+		System.out.printf("시간의 차이는 %d 초입니다.\n",(k41_endTime-k41_startTime)/1000);
+		
 	}
-	public static String getTime() {
-		Calendar k41_c = Calendar.getInstance();
-		SimpleDateFormat k41_form = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-		return k41_form.format(k41_c.getTime());
-	}
-	public static long takeTime(String k41_startTime, String k41_endTime) throws ParseException {
-		SimpleDateFormat k41_form = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-		Date k41_first = null; Date k41_second = null;
-		k41_first = k41_form.parse(k41_startTime);
-		k41_second = k41_form.parse(k41_endTime);
-		long k41_diff ;
-		
-		k41_diff = k41_first.getTime() - k41_second.getTime();
-		
-		
-		
-		return k41_diff;
-	}
+
 }
