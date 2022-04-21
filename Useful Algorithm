@@ -12,7 +12,7 @@ Useful Things!
 
   long curTime =System.currentTimeMillis();
   SimpleDateFormat time = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-  Strubg str = time.format(new Date(curTime));
+  String str = time.format(new Date(curTime));
   System.out.println(str);
   
   결과 -> 2015-13-05 11:13:15
