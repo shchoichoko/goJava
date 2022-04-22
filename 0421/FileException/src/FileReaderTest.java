@@ -27,7 +27,7 @@ public class FileReaderTest {
 			k41_ch = new char[100];	// 최대 100자 까지 읽는다.
 			k41_n = k41_fr.read(k41_ch);
 			if (k41_n == -1)	//k41_fr.read(k41_ch)의 값이 -1일때 반복문에서 벗어난다.
-				//read() 메소드는 스트림의 끝에서 항상 -1을 반환함.
+				//read() 메소드는 읽을게 없으면 -1을 반환.
 				break;
 			
 			

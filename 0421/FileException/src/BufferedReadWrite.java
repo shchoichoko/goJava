@@ -13,10 +13,10 @@ public class BufferedReadWrite {
 		//경로에서 파일을 지정한다. 작성을 위한 경로 찾기
 		BufferedWriter k41_bw = new BufferedWriter(new FileWriter(k41_f));
 		// 작성을 위한 객체 만들기.
-		k41_bw.write("안녕파일");
+		k41_bw.write("안녕파일");	//BufferedWriter로 작성하기
 		k41_bw.newLine();	//한줄 띄우기.
-		k41_bw.write("hello 헬로");
-		k41_bw.newLine();
+		k41_bw.write("hello 헬로");	//BufferedWriter로 작성하기
+		k41_bw.newLine();	//한줄 띄우기.
 		
 		k41_bw.close();
 		// 작성 완료 후 닫아준다.

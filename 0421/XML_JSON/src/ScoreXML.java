@@ -22,20 +22,25 @@ public class ScoreXML {
 
 		Element k41_root = k41_doc.getDocumentElement();
 		//root 태그를 쓰기도 하지만 지금은 쓰이는 곳이 없음.
-		NodeList k41_tag_name = k41_doc.getElementsByTagName("name");
-		NodeList k41_tag_studentid = k41_doc.getElementsByTagName("studentid");
-		NodeList k41_tag_kor = k41_doc.getElementsByTagName("kor");
-		NodeList k41_tag_eng = k41_doc.getElementsByTagName("eng");
-		NodeList k41_tag_mat = k41_doc.getElementsByTagName("mat");
+		NodeList k41_tag_name = k41_doc.getElementsByTagName("name");	//지정한 파일 태그 이름이 일치한 내용을 가져온다.
+		NodeList k41_tag_studentid = k41_doc.getElementsByTagName("studentid");	//지정한 파일 태그 이름이 일치한 내용을 가져온다.
+		NodeList k41_tag_kor = k41_doc.getElementsByTagName("kor");	//지정한 파일 태크 이름이 일치한 내용을 가져온다.
+		NodeList k41_tag_eng = k41_doc.getElementsByTagName("eng");	//지정한 파일 태크 이름이 일치한 내용을 가져온다.
+		NodeList k41_tag_mat = k41_doc.getElementsByTagName("mat");	//지정한 파일 태크 이름이 일치한 내용을 가져온다.
 		
 		
 		System.out.printf("*******************************************************\n");
 		for(int k41_i = 0; k41_i < k41_tag_name.getLength(); k41_i++) {
-			System.out.printf("이름 : %s\n", k41_tag_name.item(k41_i).getFirstChild().getNodeValue());
-			System.out.printf("학번 : %s\n", k41_tag_studentid.item(k41_i).getFirstChild().getNodeValue());
+			System.out.printf("이름 : %s\n", k41_tag_name.item(k41_i).getFirstChild().getNodeValue());		
+			//태그 이름이 name인 것중에 item은 첫번째,getFirstChild()는 노드의 첫번째 하위내용을 가져옴. getNodeValue로 해당 값을 가져옴.
+			System.out.printf("학번 : %s\n", k41_tag_studentid.item(k41_i).getFirstChild().getNodeValue());	
+			//태그 이름이 studentid인 것중에 item은 첫번째,getFirstChild()는 노드의 첫번째 하위내용을 가져옴. getNodeValue로 해당 값을 가져옴.
 			System.out.printf("국어 : %s\n", k41_tag_kor.item(k41_i).getFirstChild().getNodeValue());
+			//태그 이름이 kor인 것중에 item은 첫번째,getFirstChild()는 노드의 첫번째 하위내용을 가져옴. getNodeValue로 해당 값을 가져옴.
 			System.out.printf("영어 : %s\n", k41_tag_eng.item(k41_i).getFirstChild().getNodeValue());
+			//태그 이름이 eng인 것중에 item은 첫번째,getFirstChild()는 노드의 첫번째 하위내용을 가져옴. getNodeValue로 해당 값을 가져옴.
 			System.out.printf("수학 : %s\n", k41_tag_mat.item(k41_i).getFirstChild().getNodeValue());
+			//태그 이름이 mat인 것중에 item은 첫번째,getFirstChild()는 노드의 첫번째 하위내용을 가져옴. getNodeValue로 해당 값을 가져옴.
 			System.out.printf("*******************************************************\n");
 		}
 		

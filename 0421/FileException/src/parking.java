@@ -1,73 +1,95 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class parking {
 
 	public static void main(String[] args) throws IOException {
-
-		// ì§€ì •í•œ ìœ„ì¹˜ì— ìˆëŠ” íŒŒì¼ì„ ì„ íƒí•˜ì—¬ File ì„ ì–¸
-		File k41_f = new File("D:\\DEV\\FileReadTest\\í•œêµ­êµí†µì•ˆì „ê³µë‹¨_ì „êµ­ê³µì˜ì£¼ì°¨ì¥ì •ë³´_20191224.txt");
-		// ìœ„ì—ì„œ ì„ ì–¸í•œ Fileì„ BufferedReaderë¡œ ì½ìœ¼ë ¤ê³  ì„ ì–¸
+		// #5 ÁÖÂ÷Àå 22.04.21 ÃÖ¼öÇõ
+		
+		// ÁöÁ¤ÇÑ À§Ä¡¿¡ ÀÖ´Â ÆÄÀÏÀ» ¼±ÅÃÇÏ¿© File ¼±¾ğ		
+		File k41_f = new File(
+				"C:\\Users\\Æú¸®ÅØ\\Desktop\\¼öÇõ\\FileReadTest\\ÇÑ±¹±³Åë¾ÈÀü°ø´Ü_Àü±¹°ø¿µÁÖÂ÷ÀåÁ¤º¸_20191224.txt");
+		// À§¿¡¼­ ¼±¾ğÇÑ FileÀ» BufferedReader·Î ÀĞÀ¸·Á°í ¼±¾ğ
 		BufferedReader k41_br = new BufferedReader (new FileReader(k41_f));
-		// í…ìŠ¤íŠ¸ë¥¼ ë°”ê¿”ê°€ë©´ì„œ ë‹´ì„ ë¬¸ìì—´ ë³€ìˆ˜ ì„ ì–¸
+		// ÅØ½ºÆ®¸¦ ¹Ù²ã°¡¸é¼­ ´ãÀ» ¹®ÀÚ¿­ º¯¼ö ¼±¾ğ
 		String k41_readtxt;
-		// ì²« ì¶œì„ readtxtì— ì…ë ¥í•˜ê³  ë§Œì•½ ë¹ˆê°’ì´ì—¬ì„œ nullì´ ë‚˜ì˜¤ë©´ ë¹ˆíŒŒì¼ ë©”ì„¸ì§€ ì¶œë ¥
+		// Ã¹ ÃâÀ» readtxt¿¡ ÀÔ·ÂÇÏ°í ¸¸¾à ºó°ªÀÌ¿©¼­ nullÀÌ ³ª¿À¸é ºóÆÄÀÏ ¸Ş¼¼Áö Ãâ·Â
 		if((k41_readtxt = k41_br.readLine()) == null) {
-			System.out.println("ë¹ˆ íŒŒì¼ì…ë‹ˆë‹¤.");
+			System.out.println("ºó ÆÄÀÏÀÔ´Ï´Ù.");
 			return;
 		}
-		// field_name ë¬¸ìì—´ ë°°ì—´ì— ì²«ì¤„ì„ íƒ­ ë‹¨ìœ„ë¡œ ì˜ë¼ì„œ ì…ë ¥í•œë‹¤.
+		// field_name ¹®ÀÚ¿­ ¹è¿­¿¡ Ã¹ÁÙÀ» ÅÇ ´ÜÀ§·Î Àß¶ó¼­ ÀÔ·ÂÇÑ´Ù.
 		String[] k41_field_name = k41_readtxt.split("\t");
 		
-		//ìœµí•©ê¸°ìˆ  ìœ„ë„ê²½ë„ 
+		// Æú¸®ÅØ´ëÇĞ À§µµ °æµµ
 		double k41_lat = 37.3860521;
 		double k41_lng = 127.1214038;
 		
-		int k41_LineCnt = 1;	// í˜„ì¬ ëª‡ë²ˆì§¸ë¥¼ ëŒê³  ìˆëŠ”ì§€ í™•ì¸í•  ì •ìˆ˜í˜• ë³€ìˆ˜ ì„ ì–¸
-		int k41_maxPointer = 0;	// ìµœëŒ€ê°’ì˜ ìœ„ì¹˜ë¥¼ ë‹´ì„ ë³€ìˆ˜ ì„ ì–¸
-		int k41_minPointer = 0;	// ìµœì†Œê°’ì˜ ìœ„ì¹˜ë¥¼ ë‹´ì„ ë³€ìˆ˜ ì„ ì–¸
-		double k41_distMax = 0.0;	// ìµœëŒ€ê±°ë¦¬ë¥¼ êµ¬í•  ë³€ìˆ˜ ì„ ì–¸
-		double k41_distMin = 0.0;	// ìµœì†Œê±°ë¦¬ë¥¼ êµ¬í•  ë³€ìˆ˜ ì„ ì–¸
-
-		while((k41_readtxt = k41_br.readLine()) != null) { 	// ê°’ì´ ì—†ì„ë•Œê¹Œì§€ ë„ëŠ” whileë¬¸ ì‘ì„±
+		int k41_k41_LineCnt = 1;	// ÇöÀç ¸î¹øÂ°¸¦ µ¹°í ÀÖ´ÂÁö È®ÀÎÇÒ Á¤¼öÇü º¯¼ö ¼±¾ğ
+		int k41_maxPointer = 0;		// ÃÖ´ë°ªÀÇ À§Ä¡¸¦ ´ãÀ» º¯¼ö ¼±¾ğ
+		int k41_minPointer = 0;		// ÃÖ¼Ò°ªÀÇ À§Ä¡¸¦ ´ãÀ» º¯¼ö ¼±¾ğ
+		double k41_distMax = 0.0;	// ÃÖ´ë°Å¸®¸¦ ±¸ÇÒ º¯¼ö ¼±¾ğ
+		double k41_distMin = 0.0;	// ÃÖ¼Ò°Å¸®¸¦ ±¸ÇÒ º¯¼ö ¼±¾ğ
+		List<String> addressList = new ArrayList<String>();	
+		List<String> placeList = new ArrayList<String>();	
+		//ArrayList·Î °Ç¹° ÀÌ¸§ ¹× ÁÖ¼Ò ÀúÀåÇÏ±â À§ÇØ »ı¼º.
+		while((k41_readtxt = k41_br.readLine()) != null) { 	
+			// °ªÀÌ ¾øÀ»¶§±îÁö µµ´Â while¹® ÀÛ¼º
 			
-			String [] field = k41_readtxt.split("\t");	// ë‹¤ìŒ ë‚´ìš©ì„ íƒ­ ë‹¨ìœ„ë¡œ ì˜ë¼ì„œ field ë°°ì—´ì— ë„£ëŠ”ë‹¤.
-			System.out.printf("**[%dë²ˆì§¸ í•­ëª©]***********************\n",k41_LineCnt);	// ì§€ê¸ˆ ëª‡ë²ˆì§¸ í•­ëª©ì¸ì§€ ì¶œë ¥í•œë‹¤.
-			System.out.printf(" %s : %s\n", k41_field_name[1], field[1]);	// í•´ë‹¹ ì¤„ì˜ ì£¼ì°¨ì¥ëª…ì˜ í•­ëª©ê³¼ ë‚´ìš©ì„ ì¶œë ¥í•œë‹¤.
-			System.out.printf(" %s : %s\n", k41_field_name[2], field[2]);	// í•´ë‹¹ ì¤„ì˜ ìœ„ë„ : ìœ„ë„ê°’ ìœ¼ë¡œ ì¶œë ¥í•œë‹¤.
-			System.out.printf(" %s : %s\n", k41_field_name[3], field[3]);	// í•´ë‹¹ ì¤„ì˜ ê²½ë„ : ê²½ë„ê°’ ìœ¼ë¡œ ì¶œë ¥í•œë‹¤.
-			// ê±°ë¦¬ ê³„ì‚° (í”¼íƒ€ê³ ë¼ìŠ¤ ì •ë¦¬) sqrt(ì œê³±ê·¼), pow(ì œê³±), fieldì˜ ê°’ì„ ë”ë¸”í˜•ìœ¼ë¡œ ë°”ê¿”ì„œ í´ë¦¬í… ëŒ€í•™ì˜ ì¢Œí‘œì™€ ê±°ë¦¬ê³„ì‚°
-			double dist = Math.sqrt(Math.pow(Double.parseDouble(field[3]) - k41_lat,2)
-					+ Math.pow(Double.parseDouble(field[2]) -k41_lng, 2));
-			// ìœ„ì—ì„œ ê³„ì‚°í•œ ê±°ë¦¬ ì¶œë ¥
-			System.out.printf(" í˜„ì¬ì§€ì ê³¼ ê±°ë¦¬ : %f\n", dist);
+			String [] k41_field = k41_readtxt.split("\t");	
+			// ´ÙÀ½ ³»¿ëÀ» ÅÇ ´ÜÀ§·Î Àß¶ó¼­ field ¹è¿­¿¡ ³Ö´Â´Ù.
+			System.out.printf("**[%d¹øÂ° Ç×¸ñ]***********************\n",k41_k41_LineCnt);	
+			// Áö±İ ¸î¹øÂ° Ç×¸ñÀÎÁö Ãâ·ÂÇÑ´Ù.
+			System.out.printf(" %s : %s\n", k41_field_name[1], k41_field[1]);
+			//¼ÒÀçÁöÁö¹øÁÖ¼ÒÀÇ Ç×¸ñ°ú ³»¿ëÀ» Ãâ·ÂÇÑ´Ù.
+			System.out.printf(" %s : %s\n", k41_field_name[2], k41_field[2]);	
+			//À§µµ¸¦ Ãâ·ÂÇÑ´Ù.
+			System.out.printf(" %s : %s\n", k41_field_name[3], k41_field[3]);	
+			//°æµµ¸¦ Ãâ·ÂÇÑ´Ù.
+			addressList.add(k41_field[7]);
+			placeList.add(k41_field[1]); // °Ç¹°¸íÀ» °è¼Ó ¸®½ºÆ®¿¡ Ãß°¡ÇÑ´Ù.
+			// °Å¸® °è»ê (ÇÇÅ¸°í¶ó½º Á¤¸®) sqrt(Á¦°ö±Ù), pow(Á¦°ö), 
+			//fieldÀÇ °ªÀ» ´õºíÇüÀ¸·Î ¹Ù²ã¼­ Æú¸®ÅØ ´ëÇĞÀÇ ÁÂÇ¥¿Í °Å¸®°è»ê
+			double k41_dist = Math.sqrt(Math.pow(Double.parseDouble(k41_field[3]) - k41_lat,2)
+					+ Math.pow(Double.parseDouble(k41_field[2]) -k41_lng, 2));
+			// À§¿¡¼­ °è»êÇÑ °Å¸® Ãâ·Â
+			System.out.printf(" ÇöÀçÁöÁ¡°ú °Å¸® : %f\n", k41_dist);
 			System.out.println("************************************");
-			// ìµœëŒ€ ìµœì†Œ êµ¬í•˜ëŠ” ifë¬¸ ì„ ì–¸
-			if(k41_LineCnt == 1) {
-				k41_distMax = dist;	// í•´ë‹¹ ê°’ì„ ìµœëŒ€ê°’ ë³€ìˆ˜ì— ë„£ê¸°
-				k41_distMin = dist;	// í•´ë‹¹ ê°’ì„ ìµœì†Œê°’ ë³€ìˆ˜ì— ë„£ê¸°
-				k41_maxPointer = k41_LineCnt;	// ìµœëŒ€ê°’ì˜ ë²ˆí˜¸ ë„£ê¸°
-				k41_minPointer = k41_LineCnt;	// ìµœì†Œê°’ì˜ ë²ˆí˜¸ ë„£ê¸°
+			// ÃÖ´ë ÃÖ¼Ò ±¸ÇÏ´Â if¹® ¼±¾ğ
+			if(k41_k41_LineCnt == 1) {	// Áö±İ °ªÀÌ Ã³À½ÀÏ¶§
+				k41_distMax = k41_dist;	// ÇØ´ç°ªÀ» ÃÖ´ë°ª º¯¼ö¿¡ ³Ö±â
+				k41_distMin = k41_dist;	// ÇØ´ç °ªÀ» ÃÖ¼Ò°ª º¯¼ö¿¡ ³Ö±â
+				k41_maxPointer = k41_k41_LineCnt;	// ÃÖ´ë°ªÀÇ ¹øÈ£ ³Ö±â
+				k41_minPointer = k41_k41_LineCnt;	// ÃÖ¼Ò°ªÀÇ ¹øÈ£ ³Ö±â
+				
 			} else {
-				if(dist > k41_distMax) {
-					k41_distMax = dist;	// ìµœëŒ€ê°’ì„ ê°±ì‹ 
-					k41_maxPointer = k41_LineCnt;	//ìµœëŒ€ê°’ì˜ ìœ„ì¹˜ë¥¼ ê°±ì‹ 
+				if(k41_dist > k41_distMax) {
+					k41_distMax = k41_dist;	// ÃÖ´ë°ªÀ» °»½ÅÇÑ´Ù.
+					k41_maxPointer = k41_k41_LineCnt;	//ÃÖ´ë°ªÀÇ À§Ä¡¸¦ °»½ÅÇÑ´Ù.
 				}
-				if(k41_distMin > dist) {
-					k41_distMin = dist;	//ìµœì†Œê°’ì„ ê°±ì‹ 
-					k41_minPointer = k41_LineCnt;	// ìµœì†Œê°’ì˜ ìœ„ì¹˜ë¥¼ ê°±ì‹ 
+				if(k41_distMin > k41_dist) {
+					k41_distMin = k41_dist;	//ÃÖ¼Ò°ªÀ» °»½ÅÇÑ´Ù.
+					k41_minPointer = k41_k41_LineCnt;	// ÃÖ¼Ò°ªÀÇ À§Ä¡¸¦ °»½ÅÇÑ´Ù.
 				}
 			}
-			
-			k41_LineCnt++;	// í•œì¤„ ë” ë”í•˜ê¸°
+			k41_k41_LineCnt++;	// ÇÑÁÙ Ä«¿îÆ®
 		}
-		// ìµœëŒ€ê±°ë¦¬ , ìµœì†Œê±°ë¦¬ ì™€ ê° ëª‡ë²ˆì§¸ ì¤„ì¸ì§€ ì¶œë ¥í•œë‹¤.
-		System.out.printf("[%dë²ˆì§¸ í•­ëª©] ìµœëŒ€ê±°ë¦¬ : %.3f KM\n", k41_maxPointer, k41_distMax*100);
-		System.out.printf("[%dë²ˆì§¸ í•­ëª©] ìµœì†Œê±°ë¦¬ : %.3f KM\n", k41_minPointer, k41_distMin*100);		
-		// BufferedReader ì¢…ë£Œ
+		// ÃÖ´ë°Å¸® , ÃÖ¼Ò°Å¸® ¿Í °¢ ¸î¹øÂ° ÁÙÀÎÁö Ãâ·ÂÇÑ´Ù.
+		System.out.printf("[%s] ÃÖ´ë°Å¸® : ¾à %3.2f KM\n",
+				placeList.get(k41_maxPointer), k41_distMax*100);
+		System.out.printf("ÁÖ¼Ò : [%s]\n",addressList.get(k41_maxPointer));
+		System.out.printf("[%s] ÃÖ¼Ò°Å¸® : ¾à %3.2f M\n",
+				placeList.get(k41_minPointer), k41_distMin*100000);	
+		System.out.printf("ÁÖ¼Ò : [%s]\n",addressList.get(k41_minPointer));
+		// BufferedReader ´İ±â
 		k41_br.close();
 	}
+
 
 }

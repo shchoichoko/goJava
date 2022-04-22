@@ -3,8 +3,8 @@ import java.util.Calendar;
 
 public class ReportSheet {
 	// #19 성적 입력데이터 출력 22.04.20 최수혁
-	static int k41_iPerson = 5; // 배열 크기를 설정. 
-	static int k41_printPerson = 2;	//페이지당 인원수
+	static int k41_iPerson = 12; // 배열 크기를 설정. 
+	static int k41_printPerson = 11;	//페이지당 인원수
 	static int k41_totalPageNum = k41_iPerson/k41_printPerson;	//총 페이지 수
 	static int k41_lastPeople = k41_iPerson % k41_printPerson;	//마지막 페이지에 남은 인원 수 
 	static int k41_startNum = k41_totalPageNum * k41_printPerson;
@@ -13,7 +13,8 @@ public class ReportSheet {
 	static int k41_engSumArr[] = new int[k41_totalPageNum]; // 페이지 수만큼 크기 지정.
 	static int k41_matSumArr[] = new int[k41_totalPageNum]; // 페이지 수만큼 크기 지정.
 	static int k41_lastKorSum = 0;static int k41_lastEngSum = 0;static int k41_lastMatSum = 0;static int k41_lastSum = 0;
-	static int k41_totalKorSum = 0; static int k41_totalEngSum = 0;static int k41_totalMatSum = 0; static int k41_accPeople = 0;
+	//합계를 위한 과목별 변수 선언 및 초기화
+	static int k41_totalKorSum = 0; static int k41_totalEngSum = 0;static int k41_totalMatSum = 0; 
 	
 	public static void main(String[] args) {// 메인함수
 		inputData(); // 데이터 저장하는 함수.
@@ -77,8 +78,10 @@ public class ReportSheet {
 			double k41_matAvg = k41_matSumArr[k41_p] / (double)k41_printPerson;
 			double k41_avgSum = k41_korAvg + k41_engAvg + k41_matAvg;
 			int k41_accKorSumVal = 0;int k41_accEngSumVal = 0;int k41_accMatSumVal = 0;int k41_accTotalSum = 0;
+			// 누적 값 합계 저장을 위한 변수
 			double k41_accKorAvg, k41_accEngAvg, k41_accMatAvg; double k41_accAvgTotal;
-			
+			// 누적 평균 값을 구하기 위한 변수
+			int k41_countPeople = k41_printPerson;	//누적페이지의 평균을 위해 사람 수를 누적해서 세줌.
 				printHeader(k41_p + 1); // 성적집계표 윗부분 출력하는 함수.
 				// 인원 수 만큼, 배열 크기만큼 반복해서 출력하는 식.
 				for (int k41_i = k41_p * k41_printPerson; k41_i < k41_printPerson * (k41_p + 1); k41_i++) {
@@ -87,7 +90,10 @@ public class ReportSheet {
 								k41_inData.k41_name[k41_i], k41_inData.k41_kor[k41_i], k41_inData.k41_eng[k41_i],
 								k41_inData.k41_mat[k41_i], k41_inData.k41_sum[k41_i], k41_inData.k41_avg[k41_i]);
 						
+						
 				}
+				k41_countPeople = k41_countPeople * (k41_p+1);
+				
 				
 				System.out.println("==================================================");
 				// 과목별 합계, 전체 합계를 출력하는 식.
@@ -108,9 +114,9 @@ public class ReportSheet {
 				}
 				// 마지막 페이지와 이전까지 누적페이지 합과 평균 구하는 식
 				k41_accTotalSum = k41_accKorSumVal + k41_accEngSumVal + k41_accMatSumVal;
-				k41_accKorAvg = k41_accKorSumVal/(double)k41_accPeople;
-				k41_accEngAvg = k41_accEngSumVal/(double)k41_accPeople;
-				k41_accMatAvg = k41_accMatSumVal/(double)k41_accPeople;
+				k41_accKorAvg = k41_accKorSumVal/(double)k41_countPeople;
+				k41_accEngAvg = k41_accEngSumVal/(double)k41_countPeople;
+				k41_accMatAvg = k41_accMatSumVal/(double)k41_countPeople;
 				k41_accAvgTotal = k41_accKorAvg + k41_accEngAvg + k41_accMatAvg;
 				System.out.printf("누적페이지\n");
 				System.out.printf("합계        %6d %5d %5d %5d %6.0f\n", k41_accKorSumVal, 
