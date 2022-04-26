@@ -3,10 +3,8 @@ import java.util.Scanner;
 public class GetFV {
 
 	public static void main(String[] args) {
-		/*
-		 * rate 필수 요소입니다. 기간별 이자율입니다. nper 필수 요소입니다. 총 납입 기간 수입니다. pmt 필수 요소입니다. 각 기간의
-		 * 납입액으로서 전 기간 동안 일정합니다. 일반적으로 pmt에는 기타 비용과 세금을 제외한 원금과 이자가 포함됩니다.
-		 */
+		 //rate 기간별 이자율 nper 총 납입 기간 수
+		 //pmt  각 기간의 납입액으로서 전 기간 동안 일정함.
 		int rate = print(1);
 		int nper = print(2);
 		int pmt = print(3);
