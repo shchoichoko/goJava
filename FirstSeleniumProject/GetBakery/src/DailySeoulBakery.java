@@ -32,62 +32,61 @@ public class DailySeoulBakery {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		// 파일 저장 하는 코드. 파일명 설정 등등
-		FileOutputStream output = new FileOutputStream("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\DailySeoulBakery3.csv");
+		FileOutputStream output = new FileOutputStream("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\DailyGyeongGiBakery1.csv");
 		String startTime = "20210425";
 		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 		Calendar cal = Calendar.getInstance();
 		Date date = df.parse(startTime);
 		cal.setTime(date);
 		String[] city = { "서울%20빵%20맛집", "부산%20빵%20맛집", "경기%20빵%20맛집" };
-		for (int cityCount = 0; cityCount < city.length; cityCount++) {
 
-			for (int daily = 0; daily < 2; daily++) {
-				cal.add(Calendar.DATE, 1);
-				String dailyStr = df.format(cal.getTime());
-				System.out.println(dailyStr);
-				driver.get(
-						"https://search.naver.com/search.naver?where=view&query=" + city[cityCount] + "&sm=tab_opt&nso=so%3Ar%2Cp%3Afrom"
-								+ dailyStr + "to" + dailyStr + "%2Ca%3Aall&mode=normal&main_q=&st_coll=&topic_r_cat=");
+		for (int daily = 0; daily < 365; daily++) {
+			cal.add(Calendar.DATE, 1);
+			String dailyStr = df.format(cal.getTime());
+			System.out.println(dailyStr);
+			driver.get(
+					"https://search.naver.com/search.naver?where=view&query=경기%20빵%20맛집&sm=tab_opt&nso=so%3Ar%2Cp%3Afrom"
+							+ dailyStr + "to" + dailyStr + "%2Ca%3Aall&mode=normal&main_q=&st_coll=&topic_r_cat=");
 
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String tt = "";
+			int i = 1;
+			// GET TEXT
+
+			while (true) {
 				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				String tt = "";
-				int i = 1;
-				// GET TEXT
-
-				while (true) {
-					try {
-						tt = driver.findElement(By.xpath(
-								"/html/body/div[3]/div[2]/div/div[1]/section/div/div[2]/panel-list/div[1]/more-contents/div/ul/li["
-										+ i + "]/div/div/a"))
-								.getText();
-						System.out.println(tt);
-						tt = tt.replaceAll(",", "");
-						tt = tt + "," + "\n";
-						if (i % 10 == 0) {
-							// js.executeScript("window.scrollBy(0,500)");
-							js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-							try {
-								Thread.sleep(1000);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
+					tt = driver.findElement(By.xpath(
+							"/html/body/div[3]/div[2]/div/div[1]/section/div/div[2]/panel-list/div[1]/more-contents/div/ul/li["
+									+ i + "]/div/div/a"))
+							.getText();
+					System.out.println(tt);
+					tt = tt.replaceAll(",", "");
+					tt = tt + "," + "\n";
+					if (i % 10 == 0) {
+						// js.executeScript("window.scrollBy(0,500)");
+						js.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
 						}
-						output.write(tt.getBytes());
-						i++;
-						if (i == 125) {
-							break;
-						}
-					} catch (Exception e) {
-						e.printStackTrace();
+					}
+					output.write(tt.getBytes());
+					i++;
+					if (i == 125) {
 						break;
 					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					break;
 				}
 			}
 		}
 	}
+
 }

@@ -14,10 +14,10 @@ public class CountKeyWords {
 
 	public static void main(String[] args) throws IOException {
 
-		File f1 = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\test02.csv");
+		File f1 = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\GyeongGiKeywords.csv");
 		FileReader reader = new FileReader(f1);
 		BufferedReader br = new BufferedReader(reader);
-		File f2 = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\testSeoul.csv");
+		File f2 = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\testGyeongGi.csv");
 		BufferedWriter bw = new BufferedWriter(new FileWriter(f2));
 		String readText;
 		ArrayList<String> list = new ArrayList<String>();

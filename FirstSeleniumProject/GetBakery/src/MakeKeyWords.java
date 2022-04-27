@@ -18,41 +18,26 @@ import org.snu.ids.kkma.index.KeywordList;
 
 import io.opentelemetry.exporter.logging.SystemOutLogExporter;
 
-public class Test2 {
+public class MakeKeyWords {
 
 	public static void main(String[] args) throws IOException {
 		// #7 삼성전자 만 추출하여 파일 생성하기  22.04.21 
 		
-		File k41_f = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\DailySeoulBakery2.csv");
+		File k41_f = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\DailyGyeongGiBakery2.csv");
 		BufferedReader k41_br = new BufferedReader(new FileReader(k41_f));
 		//파일을 읽기 위한 BufferedReader를 객체 생성.
-		File k41_f1 = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\\\Data\\test01.csv");
+		File k41_f1 = new File("C:\\Users\\폴리텍\\Desktop\\수혁\\Data\\GyeongGiKeywords.csv");
 		BufferedWriter k41_bw1 = new BufferedWriter(new FileWriter(k41_f1));
 		//파일 작성을 위한 BufferedWriter 객체를 생성.
 		String k41_readtxt;
 		
 		//한줄씩 읽기위한 문자열 생성. 
-		int k41_cnt = 0; int k41_wcnt = 0;
 		List<String> strList = new ArrayList<String>();
-		int countSaltBread=0;
 		while((k41_readtxt = k41_br.readLine())!=null) {	//
 			String[] k41_field = k41_readtxt.split(",");	//콤마 단위로 저장
 			
 			System.out.println(k41_field[0]);
 			
-			/*
-			for(int i =0; i < k41_field.length; i++) {
-				strList.add(k41_field[i]);
-			}
-			
-			for(int i = 0; i < strList.size(); i++) {
-				keTest(strList.get(i));
-				k41_bw1.write(k41_field[0]);
-				k41_bw1.newLine();
-			}
-			*/
-
-			//
 			KeywordExtractor ke = new KeywordExtractor();
 			KeywordList kl = ke.extractKeyword(k41_field[0], true);
 			String save = "";
@@ -65,13 +50,10 @@ public class Test2 {
 			k41_bw1.write(save);
 			k41_bw1.newLine();
 			
-			//
-			k41_cnt++;	//총 문장수 카운트.
 		}
 		k41_br.close();
 		k41_bw1.close();
 		
-	//	System.out.printf("Program End[%d][%d]records\n", k41_cnt, k41_wcnt);
 		
 		
 	}

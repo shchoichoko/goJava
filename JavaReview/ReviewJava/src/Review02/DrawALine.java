@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class DrawALine {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		System.out.println(print());
 	}
 
@@ -22,7 +21,7 @@ public class DrawALine {
 	}
 
 	public static String checkLine(String first, String second, String third) {
-		String result = " ";
+		String result = "Fail";
 		if (Integer.parseInt(first) == 0 || Integer.parseInt(second) == 0 || Integer.parseInt(third) == 0) {
 			result = "PASS!!";
 		} else {
