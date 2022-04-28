@@ -3,8 +3,8 @@ import java.util.Calendar;
 
 public class ReportSheet {
 	// #19 성적 입력데이터 출력 22.04.20 최수혁
-	static int k41_iPerson = 12; // 배열 크기를 설정. 
-	static int k41_printPerson = 11;	//페이지당 인원수
+	static int k41_iPerson = 200; // 배열 크기를 설정. 
+	static int k41_printPerson = 30;	//페이지당 인원수
 	static int k41_totalPageNum = k41_iPerson/k41_printPerson;	//총 페이지 수
 	static int k41_lastPeople = k41_iPerson % k41_printPerson;	//마지막 페이지에 남은 인원 수 
 	static int k41_startNum = k41_totalPageNum * k41_printPerson;
