@@ -6,6 +6,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/폴리텍/Desktop/SooHyeok/json-simple-1.1.1.jar"/>
+=======
+	<classpathentry kind="lib" path="D:/DEV/json-simple-1.1.1.jar"/>
+>>>>>>> 9e4ec3a1e99b07512ac699afe9fc17a5d0884266
 	<classpathentry kind="output" path="bin"/>
 </classpath>
