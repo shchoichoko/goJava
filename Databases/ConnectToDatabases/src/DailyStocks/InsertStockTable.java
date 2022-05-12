@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 public class InsertStockTable {
@@ -20,20 +21,17 @@ public class InsertStockTable {
 		      // Connection, Statement, ResultSet 순서
 		      Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.23.106:3306/kopoctc", "root", "1234"); // JDBC 드라이버 파일 로딩                                                                                       
 
-		      String QueryTxt = "insert into stockTable (short_code, date, market_cost, high_cost, low_cost, last_cost, trade_amount, trade_money)"
+		      String QueryTxt = "insert into stockTable (date, short_code, market_cost, high_cost, low_cost, last_cost, trade_amount, trade_money)"
 		            + "values(?,?,?,?,?,?,?,?)";
 		      PreparedStatement pstmt = conn.prepareStatement(QueryTxt); // JDBC 드라이버 파일 연결
 
-		      File f = new File("C:\\Users\\kopo\\Desktop\\요약자료\\자바\\20220422_자바\\StockDailyPrice.csv");
+		      File f = new File("C:\\Users\\폴리텍\\Desktop\\SooHyeok\\FileReadTest\\StockDailyPrice.csv");
 		      BufferedReader br = new BufferedReader(new FileReader(f));
-		      String readtext;
-
+		      String readtext = " ";
+		      readtext = br.readLine();
 		      if ((readtext = br.readLine()) == null) {
 		         System.out.println("빈 파일 입니다.");
 		      }
-
-		      String[] field_Name = readtext.split(",");
-
 		      int linecount = 0;
 		      conn.setAutoCommit(false);
 		      // 시간 형태 만들기
@@ -42,11 +40,11 @@ public class InsertStockTable {
 		      Date startInDate = new Date(startTime); // 형태 날짜로 변환
 		      String startFormat = sdf.format(startInDate); // 문자열 변수로 형태 변환
 
-		      while ((readtext = br.readLine()) != null) {
+		      while ((readtext = br.readLine()) != null) { //읽을 값이 없을 때까지 반복한다.
 
-		         String[] field = readtext.split(",");
-
-		         pstmt.setInt(1, Integer.parseInt(field[1]));
+		         String[] field = readtext.split(","); //콤마 기준으로 분리하여 field 배열에 저장한다.
+		         System.out.println(Arrays.toString(field));
+		         pstmt.setInt(1, Integer.parseInt(field[1]));	
 		         pstmt.setString(2, field[2]);
 		         pstmt.setInt(3, Integer.parseInt(field[4]));
 		         pstmt.setInt(4, Integer.parseInt(field[5]));
@@ -59,9 +57,10 @@ public class InsertStockTable {
 		         pstmt.clearParameters();
 		         linecount++;
 		         try {
-		            if (linecount % 10000 == 0) {
+		            if (linecount % 25000 == 0) {//10000개 만큼 넣을 때마다 commit 하기
 		               pstmt.executeBatch();
 		               conn.commit();
+		               
 		            }
 		         } catch (Exception e) {
 		            e.printStackTrace();
@@ -82,13 +81,13 @@ public class InsertStockTable {
 		      long diffTimeMin = (diffTime / 1000 / 60); // 분 구하기
 		      long diffTimeSec = (diffTime / 1000 % 60); // 초 구하기
 
-		      br.close(); //꼭 닫아줘야 한다
-		      pstmt.close(); // 꼭 닫아줘야 한다
-		      conn.close(); // 꼭 닫아줘야 한다
+		      br.close(); //닫아주기
+		      pstmt.close(); //닫아주기
+		      conn.close(); //닫아주기
 		      System.out.println("시작 시간 : " + startFormat); // 시작 시간 출력
 		      System.out.println("종료 시간 : " + finishFormat); // 종료 시간 출력
 		      System.out.println("소요 시간 : " + diffTimeMin + "분 " + diffTimeSec + "초"); // 소요 시간 출력
 		      System.out.println("총 항목 개수 : " + linecount); // 총 항목 개수 출력
-
+		       	
 		   }
 		}

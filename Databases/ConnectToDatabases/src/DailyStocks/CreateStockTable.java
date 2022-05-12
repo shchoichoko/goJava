@@ -16,15 +16,15 @@ public class CreateStockTable{
 		      Statement stmt = conn.createStatement(); // JDBC 드라이버 파일 연결
 
 		      stmt.execute("create table stockTable (" 
-		            + "date int, "
-		            + "short_code  varchar(100), "
-		            + "market_cost int, "
-		            + "high_cost int, "
-		            + "low_cost int, "
-		            + "last_cost int, "
-		            + "trade_amount long, "
-		            + "trade_money long, "
-		            + "PRIMARY KEY (date, short_code))"
+		            + "date int,"//일자
+		            + "short_code  varchar(100), "//단축 코드
+		            + "market_cost int,"//시가
+		            + "high_cost int,"//고가
+		            + "low_cost int,"//저가
+		            + "last_cost int,"//종가
+		            + "trade_amount long,"//거래량
+		            + "trade_money long,"//거래 대금
+		            + "PRIMARY KEY (date, short_code))"//기본 키 복합키로 설정
 		            + "DEFAULT CHARSET=utf8;" // 언어 지정 > utf8 (한글)
 		      );
 		      // open한 만큼 close 해 주어야 한다

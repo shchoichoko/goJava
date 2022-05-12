@@ -10,17 +10,19 @@ public class SearchData {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// Select문으로 원하는 자료 찾기
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.jdbc.Driver");// MY SQL과 JDBC를 연동한다
 		Connection cnn = DriverManager.getConnection("jdbc:mysql://192.168.23.106:3306/kopoctc", "root", "1234");
+		//서버와 kopoctc 데이터베이스 연결
 		Statement stmt = cnn.createStatement();
 		double lat = 37.3860521;double lng = 127.1214038;
+		//거리 측정을 위한 위도 경도 좌표 설정.
 		String queryTxt;
-		queryTxt = String.format("select * from freewifi where "+
+		queryTxt = String.format("select * from freewifi where "+//가장 가까운 거리의 무료 와이파이 지점 구하는 쿼리문
                 "SQRT( POWER( latitude-%f,2) + POWER (longitude-%f,2) ) = "+
                 "(select MIN( SQRT( POWER( latitude-%f,2)+POWER (longitude-%f,2)))from freewifi);",
                 lat,lng,lat,lng);
-		//queryTxt = "select * from freewifi";
-		//queryTxt = "select * from freewifi where service_provider = 'SKT'";
+		queryTxt = "select * from freewifi"; //전체 조회하는 쿼리문
+		queryTxt = "select * from freewifi where service_provider = 'SKT'";//통신사가 SKT인 것만 조회하는 쿼리문
 		queryTxt = "select * from freewifi where inst_country = '수원시'";
 		
 		ResultSet rs = stmt.executeQuery(queryTxt);

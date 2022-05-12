@@ -12,9 +12,9 @@ public class CreateExamtable {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection cnn = DriverManager.getConnection("jdbc:mysql://192.168.23.106:3306/kopoctc", "root", "1234");
 		Statement stmt = cnn.createStatement();
-		stmt.execute(order(1));
-		stmt.close();
-		cnn.close();
+		stmt.execute(order(2));
+		stmt.close();//╢щ╬фаж╠Б
+		cnn.close();//╢щ╬фаж╠Б
 	}
 
 	public static String order(int order) {
@@ -23,7 +23,7 @@ public class CreateExamtable {
 			value = "create table examtable(studentid varchar(20) primary key,name varchar(15), kor int(3), eng int(3), math int(3));";
 			//value = "insert into examtable(studentid, name, kor, eng, math) values('kopo1000','Steve1000',65,72,80);";
 		} else {
-			value = "drop table examtable;";
+			value = "drop table examtable3;";
 		}
 		return value;
 	}
