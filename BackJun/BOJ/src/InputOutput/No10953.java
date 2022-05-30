@@ -12,10 +12,10 @@ public class No10953 {
 		System.out.println("");
 		String A = " ";
 		int C = 0;
-		for( int i = 0; i< T; i++) {
+		for( int i = 0; i < T; i++) {
 			A = sc.nextLine();
-			C = Integer.parseInt(A.substring(0,1))+Integer.parseInt(A.substring(2, 2));
-			System.out.println(C);
+			
+			System.out.println(A);
 		}
 		
 		
