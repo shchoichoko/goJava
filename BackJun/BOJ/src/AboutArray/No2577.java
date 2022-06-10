@@ -23,12 +23,11 @@ public class No2577 {
 		for (int i = 0; i < 10; i++) {
 			count = 0;
 			for (int j = 0; j < calculateResult.length(); j++) {
-				System.out.println(calculateResult.charAt(j));
-//				if (i == calculateResult.charAt(j)) {
-//					count++;
-//				}
+				if (i == Character.getNumericValue(calculateResult.charAt(j))) {
+					count++;
+				}
 			}
-			//System.out.println(count);
+			System.out.println(count);
 			
 		}
 	}
