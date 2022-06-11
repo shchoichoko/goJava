@@ -10,39 +10,27 @@ public class No4344 {
 //		이어서 N명의 점수가 주어진다. 
 //		점수는 0보다 크거나 같고, 100보다 작거나 같은 정수이다.
 		Scanner sc = new Scanner(System.in);
-		//int caseNum = sc.nextInt();
-		int count = 0;
-		//while(count<caseNum) {
-			getRate(sc.nextInt());
-			count++;
-		//}
-		
+		int caseNum = sc.nextInt();
+		for(int index = 0; index < caseNum; index ++) {
+			int peopleNum = sc.nextInt();
+			int sum = 0;
+			int [] gradeArray = new int[peopleNum];
+			double avg =0;	//평균 점수
+			int upperPeople = 0;	//평균을 넘는 학생 수
+			for(int i = 0; i < peopleNum; i ++ ) {
+				gradeArray[i] = sc.nextInt();
+				sum += gradeArray[i];
+			}
+			avg = sum/peopleNum;
+			for(int j = 0; j < peopleNum; j ++ ) {
+				if(gradeArray[j] > avg) {
+					upperPeople++;
+				}
+			}
+			System.out.printf("%.3f",(upperPeople/(double)peopleNum)*100.0);
+			System.out.println("%");
+		}
+		sc.close();
 	}
 	
-	public static void getRate(int peopleNum) {
-		Scanner sc = new Scanner(System.in);
-		int sum = 0;
-		int grade = 0;
-		int [] peopleArray = new int[peopleNum];
-		double avg =0;//평균 점수
-		System.out.println(peopleNum);
-		int upperPeople = 0;//평균을 넘는 학생 수
-		for(int i = 0; i < peopleNum; i ++ ) {
-			grade = sc.nextInt();
-			peopleArray[i] = grade;
-			sum += grade;
-			System.out.print(peopleArray[i]);
-		}
-		
-		System.out.println(sum);
-		avg = sum/peopleNum;
-		System.out.println(avg);
-		for(int j = 0; j < peopleNum; j ++ ) {
-			if(peopleArray[j] > avg) {
-				upperPeople++;
-			}
-		}
-		//System.out.printf("%f\n",(upperPeople/peopleNum)*100.0);
-	}
-
 }
