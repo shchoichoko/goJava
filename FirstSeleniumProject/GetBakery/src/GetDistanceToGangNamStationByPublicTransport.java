@@ -61,7 +61,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 			}
 
 			driver.findElement(By.xpath("/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div[1]/directions-search/div[1]/directions-search-box[1]/div/div/div[1]/input"))
-					.sendKeys(k41_field[0]); // 출발지 입력
+					.sendKeys("강남 "+k41_field[0]); // 출발지 입력
 			try {
 				Thread.sleep(1500);
 			} catch (InterruptedException e) {
@@ -125,7 +125,9 @@ public class GetDistanceToGangNamStationByPublicTransport {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-			} 
+			} finally {
+				continue;
+			}
 
 
 		}
