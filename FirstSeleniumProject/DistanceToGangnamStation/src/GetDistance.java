@@ -2,21 +2,26 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import javax.xml.crypto.Data;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
+/*
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+*/
 
-public class GetBakery {
+public class GetDistance {
 	public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
 	public static final String WEB_DRIVER_PATH = "C:\\chromedriver2\\chromedriver.exe";
 
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws FileNotFoundException {
+
 		try {
 			System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 		} catch (Exception e) {
@@ -121,6 +126,7 @@ public class GetBakery {
 				continue;
 			}
 		}
-	}
+		}
+	
 
 }
