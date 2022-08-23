@@ -34,13 +34,13 @@ public class GetDistanceToGangNamStationByPublicTransport {
 
 		// 파일 읽기
 		// 파일을 읽기 위한 BufferedReader를 객체 생성
-		File k41_f = new File(
-				"C:\\Users\\폴리텍\\Desktop\\SooHyeok\\GetToGangNamStation\\ApartmentAddress(departure).csv");
+		//File k41_f = new File("C:\\Users\\폴리텍\\Desktop\\SooHyeok\\GetToGangNamStation\\ApartmentAddress(departure).csv");
+		File k41_f = new File("C:\\Users\\폴리텍\\Desktop\\SooHyeok\\GetToGangNamStation\\test01.csv");
 		BufferedReader k41_br = new BufferedReader(new FileReader(k41_f));
 
 		// 파일 작성을 위한 BufferedWriter 객체를 생성.
 		File k41_f1 = new File(
-				"C:\\Users\\폴리텍\\Desktop\\SooHyeok\\GetToGangNamStation\\DistanceToGangNamStationByPublicTransport2.csv");
+				"C:\\Users\\폴리텍\\Desktop\\SooHyeok\\GetToGangNamStation\\Result.csv");
 		BufferedWriter k41_bw1 = new BufferedWriter(new FileWriter(k41_f1));
 
 		String k41_readtxt;
@@ -49,14 +49,14 @@ public class GetDistanceToGangNamStationByPublicTransport {
 		while ((k41_readtxt = k41_br.readLine()) != null) { //
 			String[] k41_field = k41_readtxt.split(","); // 콤마 단위로 저장
 
-			System.out.println(k41_field[0]);
+			System.out.println(k41_field[0]+" "+k41_field[1]);
 			driver.get("https://map.naver.com/v5/?c=14151139.0541014,4492617.0468526,15,0,0,0,dh");
 
 			driver.findElement(
 					By.xpath("/html/body/app/layout/div[3]/div[1]/navbar/perfect-scrollbar/div/div[1]/div/ul/li[2]/a"))
 					.click();
 			try { // 길찾기 누르기
-				Thread.sleep(3000);
+				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				continue;
@@ -64,9 +64,9 @@ public class GetDistanceToGangNamStationByPublicTransport {
 
 			driver.findElement(By.xpath(
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div[1]/directions-search/div[1]/directions-search-box[1]/div/div/div[1]/input"))
-					.sendKeys("서울시 "+k41_field[0]); // 출발지 입력
+					.sendKeys(k41_field[0]+" "+k41_field[1]); // 출발지 입력
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -80,7 +80,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 				continue;
 			}
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -89,7 +89,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div[1]/directions-search/div[1]/directions-search-box[2]/div/div/div[1]/input"))
 					.sendKeys("강남역"); // 도착지 입력
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -112,7 +112,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 				continue;
 			}
 			try { // 길찾기 누르기
-				Thread.sleep(1500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -129,14 +129,14 @@ public class GetDistanceToGangNamStationByPublicTransport {
 						"html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/directions-summary-list/directions-hover-scroll/div/ul/li[1]/directions-summary-item-pubtransit/div[1]/div/strong/readable-duration/span[1]"))
 						.getText();
 				firstResult = firstResult.replaceAll(",", "");
-				if (Integer.parseInt(firstResult) < 3) {
+				if (Integer.parseInt(firstResult) < 4) {
 					minutes = driver.findElement(By.xpath(
 							"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/directions-summary-list/directions-hover-scroll/div/ul/li[1]/directions-summary-item-pubtransit/div[1]/div/strong/readable-duration/span[3]"))
 							.getText();
 
-					firstResult = k41_field[0] + "," + firstResult + "시간" + minutes + "분,";
+					firstResult = k41_field[0]+"," + k41_field[1] + "," + firstResult + "시간" + minutes + "분,";
 				} else {
-					firstResult = k41_field[0] + "," + firstResult + "분,";
+					firstResult = k41_field[0]+"," + k41_field[1] + "," + firstResult + ",";
 				}
 				System.out.println("강남 :" + firstResult);
 
@@ -144,7 +144,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 				e.printStackTrace();
 			}
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -154,7 +154,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div/ul/li[2]/a"))
 					.click();
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -182,7 +182,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					distance = driver.findElement(By.xpath(
 							"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/directions-summary-list/directions-hover-scroll/div/ul/li[1]/directions-summary-item-car/directions-summary-item-car-card/div[1]/div[1]/span/readable-distance"))
 							.getText();
-					carFirst = carFirst + "분," + distance + ",";
+					carFirst = carFirst + "," + distance + ",";
 				}
 				System.out.println("강남역(차량이동) 소요시간 및 거리 :" + carFirst);
 
@@ -195,7 +195,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div/ul/li[1]/a"))
 					.click();
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -209,7 +209,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div/directions-search/div[1]/directions-search-box[2]/div/div/div[1]/input"))
 					.clear();
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -218,7 +218,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div[1]/directions-search/div[1]/directions-search-box[2]/div/div/div[1]/input"))
 					.sendKeys("서울시청역"); // 도착지 입력
 			try {
-				Thread.sleep(1500);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -255,7 +255,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 
 					secondResult = secondResult + "시간" + minutes + "분,";
 				} else {
-					secondResult = secondResult + "분,";
+					secondResult = secondResult + ",";
 				}
 				System.out.println("시청역 :" + secondResult);
 			} catch (Exception e) {
@@ -272,7 +272,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div/ul/li[2]/a"))
 					.click();
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -299,7 +299,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					distance = driver.findElement(By.xpath(
 							"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/directions-summary-list/directions-hover-scroll/div/ul/li[1]/directions-summary-item-car/directions-summary-item-car-card/div[1]/div[1]/span/readable-distance"))
 							.getText();
-					carSecond = carSecond + "분," + distance + ",";
+					carSecond = carSecond + "," + distance + ",";
 				}
 				System.out.println("시청역(차량이동) 소요시간 및 거리 :" + carSecond);
 
@@ -312,7 +312,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div/ul/li[1]/a"))
 					.click();
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -372,7 +372,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 
 					thirdResult = thirdResult + "시간" + minutes + "분,";
 				} else {
-					thirdResult = thirdResult + "분,";
+					thirdResult = thirdResult + ",";
 				}
 				System.out.println("광화문역 : " + thirdResult);
 
@@ -384,7 +384,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/div/ul/li[2]/a"))
 					.click();
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(1500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -411,7 +411,7 @@ public class GetDistanceToGangNamStationByPublicTransport {
 					distance = driver.findElement(By.xpath(
 							"/html/body/app/layout/div[3]/div[2]/shrinkable-layout/div/directions-layout/directions-result/div[1]/directions-summary-list/directions-hover-scroll/div/ul/li[1]/directions-summary-item-car/directions-summary-item-car-card/div[1]/div[1]/span/readable-distance"))
 							.getText();
-					carThird = carThird + "분," + distance + ",";
+					carThird = carThird + "," + distance + ",";
 				}
 				System.out.println("광화문역(차량이동) 소요시간 및 거리 :" + carThird);
 				result = firstResult + secondResult + thirdResult + carFirst + carSecond + carThird +"\n";
